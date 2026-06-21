@@ -2,9 +2,9 @@ import { Kanban } from "../models/kanban.js";
 
 /**
  * What we need:
- *  Get all cards
- *  Get one card
- *  Create one cards
+ *  Get all cards - DONE
+ *  Get one card - DISCARDED (for now)
+ *  Create one cards - DONE
  *  Update one card
  *  Delete one card
  */
@@ -34,10 +34,23 @@ export async function createCardService(cardInfo) {
   return await card.save();
 }
 
-// export async function getOneCardService(id){
-//     const card = await Kanban.findById(id);
-//     if(!card){
-//         throw new Error("Cannot find card...");
-//     }
-//     return card;
-// }
+export async function updateCardService(cardId, updatedData) {
+  const updateCard = await Kanban.findByIdAndUpdate(
+    { _id: cardId },
+    { $set: updatedData },
+    { returnDocument: 'after' },
+  );
+  if (!updateCard) {
+    throw new Error("Card not found");
+  }
+
+  return updateCard;
+}
+
+export async function deleteCardService(cardId){
+  const deleteCard = await Kanban.findByIdAndDelete(cardId);
+  if(!deleteCard){
+    throw new Error("Cannot delete card");
+  }
+  return deleteCard;
+}

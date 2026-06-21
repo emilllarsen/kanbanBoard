@@ -1,7 +1,8 @@
 import express from 'express';
 import validate from '../validation/validate.js';
 import { createCardValidator } from '../validation/createCard.js';
-import { getAllCardsController, createCardController } from '../controller/kanbanController.js';
+import { updateCardValidator } from '../validation/updateCard.js';
+import { getAllCardsController, createCardController, updateCardController, deleteCardController } from '../controller/kanbanController.js';
 const kanbanRoute = express.Router();
 
 /**
@@ -14,10 +15,12 @@ const kanbanRoute = express.Router();
 
 
 kanbanRoute.get("/cards", getAllCardsController);
+
 kanbanRoute.post("/create", createCardValidator(), validate, createCardController);
 
-// kanbanRoute.patch("/:id");
-// kanbanRoute.delete("/:id");
+kanbanRoute.patch("/cards/:id", updateCardValidator(), validate, updateCardController );
+
+kanbanRoute.delete("/cards/:id", deleteCardController);
 
 
 

@@ -1,4 +1,11 @@
 import { body } from "express-validator";
+import {
+  MIN_LENGTH_TITLE,
+  MAX_LENGTH_TITLE,
+  MIN_LENGTH_DESCRIPTION,
+  MAX_LENGTH_DESCRIPTION,
+} from "../config/constants.js";
+import { dateNotInPast } from "../service/kanbanService.js";
 
 export function updateCardValidator() {
   return [
