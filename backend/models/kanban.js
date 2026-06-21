@@ -4,7 +4,7 @@ import {
   MAX_LENGTH_TITLE,
   MIN_LENGTH_DESCRIPTION,
   MAX_LENGTH_DESCRIPTION,
-} from "@/config/constants.js";
+} from "../config/constants.js";
 
 const kanbanSchema = new mongoose.Schema({
   title: {
